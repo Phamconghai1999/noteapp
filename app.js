@@ -2,11 +2,12 @@ const express = require("express");
 const app = express();
 const route = require("./routes");
 const exphbs = require("express-handlebars");
-const bodyParser = require("body-parser");
+const db = require("./config/db");
+db.connect();
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: false }));
 // parse application/json
-app.use(bodyParser.json());
+app.use(express.json());
 // set static dir
 app.use(express.static(__dirname + "/public"));
 //Template engine
