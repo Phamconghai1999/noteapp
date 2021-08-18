@@ -1,5 +1,5 @@
 Auth = (req, res, next) => {
-  console.log(req.cookies.Auth);
+  console.log(req.cookies.accessToken);
   if (!req.cookies.accessToken) {
     res.render("auth/login", { layout: false });
   } else {
