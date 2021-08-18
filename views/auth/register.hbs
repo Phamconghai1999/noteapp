@@ -24,28 +24,32 @@
                     <img src="/img/ani.jpg" alt="profile_img" height="140px" width="140px;">
                 </div>
                 <h3>Login</h3>
-                <form method="post" action="/auth/login">
-                    {{#if requireLogin}}
-                    <div>
-                        <p style="color: rgb(253, 0, 0);">*require login</p>
-                    </div>
-                    {{/if}}
+                <form method="post" action="/auth/register">
                     <div class="form-group ">
                         <input type="email" class="form-control" name="email" placeholder="Email" required>
                     </div>
                     <div class="form-group mt-2">
-                        <input type="text" class="form-control" name="password" placeholder="Password" required>
+                        <input type="password" class="form-control" name="password" placeholder="Password" required>
                     </div>
-                    {{#if loginError}}
+                    <div class="form-group mt-2">
+                        <input type="password" class="form-control" name="passwordRef" placeholder="Password Confirm"
+                            required>
+                    </div>
+                    {{#if confirmError}}
                     <div>
-                        <p style="color: rgb(253, 0, 0);">Invalid email or password</p>
+                        <p style="color: rgb(253, 0, 0);">Please confirm your password</p>
+                    </div>
+                    {{/if}}
+                    {{#if registerError}}
+                    <div>
+                        <p style="color: rgb(253, 0, 0);">Invalid email</p>
                     </div>
                     {{/if}}
                     <div class="form-group mt-2">
-                        <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                        <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
                     </div>
                     <div class="form-group forget-password">
-                        <a href="/auth/register">Don't have an account? Register</a>
+                        <a href="/auth/login">Have an account? Sign in!</a>
                     </div>
                 </form>
             </div>

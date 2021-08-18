@@ -1,12 +1,10 @@
 const express = require("express");
-// const app = express(); // not used because define at index.js
 const router = express.Router();
+const Auth = require("../app/middlewares/Auth");
 
 const siteController = require("../app/controllers/SiteController");
 
-// simple logger for this router's requests
-// all requests to this router will first hit this middleware
-//siteController.index
-router.get("/", siteController.index);
+//[GET] domain.com/
+router.get("/", Auth, siteController.index);
 
 module.exports = router;

@@ -1,9 +1,23 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const route = require("./routes");
 const exphbs = require("express-handlebars");
-const db = require("./config/db");
-db.connect();
+const session = require("express-session");
+
+const database = require("./config/db");
+
+//use session
+app.use(
+  session({
+    secret: `${process.env.SESSION_SECRET}`,
+    resave: true,
+    saveUninitialized: true,
+    cookie: { secure: true },
+  })
+);
+// connect database
+database.connect();
 // parse application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: false }));
 // parse application/json

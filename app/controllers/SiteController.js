@@ -1,7 +1,7 @@
 class SiteController {
   // [GET] /
   index(req, res, next) {
-    res.render("auth/login", { layout: false });
+    res.render("home");
   }
 }
 
