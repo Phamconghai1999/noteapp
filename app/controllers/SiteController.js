@@ -1,7 +1,8 @@
 class SiteController {
   // [GET] /
   index(req, res, next) {
-    res.render("home");
+    let userData = { ...req.userData };
+    res.render("home", { userData });
   }
 }
 
