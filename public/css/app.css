@@ -38,7 +38,7 @@ body {
   font-size: 21px;
   text-align: center;
   color: #ff60f7;
-  margin: auto 3px; }
+  margin: auto 12px auto 3px; }
 
 @keyframes mymove {
   from {
