@@ -29,7 +29,12 @@
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
             </ul>
-
+            <div class="profile-img">
+                <a href="/me/profile"><img src={{userData.avatar}} alt="profile_img" height="40px" width="40px"></a>
+            </div>
+            <div>
+                <p class="navbar-username">{{userData.userName}}</p>
+            </div>
             <a href="/auth/logout" class="btn btn-outline-info btn-sm" type="submit">Logout</a>
         </div>
     </div>

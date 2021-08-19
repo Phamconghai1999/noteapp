@@ -3,6 +3,7 @@ const Account = require("../models/Account"); // import model from models.
 require("dotenv").config();
 
 class AuthController {
+  // method: [GET]
   // [GET] domain.com/auth/login
   // [GET] domain.com/auth/
   index(req, res, next) {
@@ -21,7 +22,7 @@ class AuthController {
   showRegister(req, res) {
     res.render("auth/register", { layout: false });
   }
-
+  // method: [POST]
   // [POST] domain.com/auth/register
   register(req, res, next) {
     let { email, password, passwordRef } = req.body;
@@ -40,12 +41,16 @@ class AuthController {
             .save()
             .then((userAccount) => {
               let accessToken = jwt.sign(
-                { userId: `${userAccount._id}` },
-                "privateKey",
-                { algorithm: "RS256" }
+                {
+                  userId: `${userAccount._id}`,
+                  userName: `${userAccount.name}`,
+                  avatar: `${userAccount.avatar}`,
+                  email: `${userAccount.email}`,
+                },
+                `${process.env.JWT_SECRET_KEY}`
               );
               res.cookie("accessToken", `${accessToken}`, {
-                expires: new Date(Date.now() + 600000),
+                expires: 0, // new Date(Date.now() + 600000),
               });
               res.redirect("../me/profile");
             })
@@ -57,22 +62,29 @@ class AuthController {
   // [POST] domain.com/auth/login
   login(req, res, next) {
     let { email, password } = req.body;
-    Account.findOne({ email, password })
-      .then((dataUser) => {
-        if (dataUser === null) {
-          res.render("auth/login", { layout: false, loginError: true });
-        } else {
-          let accessToken = jwt.sign(
-            { userId: `${dataUser._id}` },
-            `${process.env.JWT_SECRET_KEY}`
-          );
-          res.cookie("accessToken", `${accessToken}`, {
-            expires: new Date(Date.now() + 600000),
-          });
-          res.redirect("../me/profile");
-        }
-      })
-      .catch((err) => next(err));
+    //auth by function in Model
+    Account.authenticate(email, password, (err, user) => {
+      if (err || !user) {
+        // error or no user return from callback
+        res.render("auth/login", { layout: false, loginError: true });
+        return;
+      } else {
+        let accessToken = jwt.sign(
+          {
+            userId: `${user._id}`,
+            userName: `${user.name}`,
+            avatar: `${user.avatar}`,
+            email: `${user.email}`,
+          },
+          `${process.env.JWT_SECRET_KEY}`
+        );
+        res.cookie("accessToken", `${accessToken}`, {
+          expires: new Date(Date.now() + 600000),
+        });
+
+        return res.redirect("../me/profile");
+      }
+    });
   }
   // [POST] domain.com/auth/login
 }

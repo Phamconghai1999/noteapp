@@ -1,7 +1,11 @@
+const { mongooseToObject } = require("../../util/mongooseObj");
+
 class ProfileController {
   // [GET] domain.com/me/profile
   index(req, res, next) {
-    res.render("me/profile");
+    //console.log(req.userData);
+    let userData = { ...req.userData };
+    res.render("me/profile", { userData });
   }
 }
 

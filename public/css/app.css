@@ -30,8 +30,15 @@ body {
   text-align: center; }
 
 .profile-img img {
+  border: 1px solid rgba(155, 100, 255, 0.788);
   border-radius: 50%;
   /* animation: mymove 2s infinite; */ }
+
+.navbar-username {
+  font-size: 21px;
+  text-align: center;
+  color: #ff60f7;
+  margin: auto 3px; }
 
 @keyframes mymove {
   from {

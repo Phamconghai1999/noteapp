@@ -37,8 +37,16 @@ body {
 }
 
 .profile-img img {
+  border: 1px solid rgba(155, 100, 255, 0.788);
   border-radius: 50%;
   /* animation: mymove 2s infinite; */
+}
+
+.navbar-username {
+  font-size: 21px;
+  text-align: center;
+  color: rgb(255, 96, 247);
+  margin: auto 3px;
 }
 
 @keyframes mymove {
