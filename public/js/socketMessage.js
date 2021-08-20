@@ -1,16 +1,19 @@
-let port = 3000; // default
 let accessToken;
 findKey = function (key, str) {
   return str.startsWith(key) || str.startsWith(` ${key}`);
 };
-let cookies = document.cookie.split(";");
-for (let cookie of cookies) {
-  findKey("ioport", cookie) ? (port = cookie.split("=")[1]) : port;
-  findKey("accessToken", cookie)
-    ? (accessToken = cookie.split("=")[1])
-    : accessToken;
+try {
+  let cookies = document.cookie.split(";");
+  for (let cookie of cookies) {
+    findKey("accessToken", cookie)
+      ? (accessToken = cookie.split("=")[1])
+      : accessToken;
+  }
+} catch (error) {
+  console.log(error);
 }
-const socket = io("https://aninote.herokuapp.com");
+
+const socket = io("http://localhost:3000");
 socket.on("connect", () => {
   // either with send()
   socket.send("TokenClient: " + accessToken);

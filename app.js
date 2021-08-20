@@ -1,58 +1,15 @@
 require("dotenv").config();
-var jwt = require("jsonwebtoken");
 //
 const express = require("express");
 const app = express();
 const route = require("./routes");
 const exphbs = require("express-handlebars");
 const session = require("express-session");
-const port = process.env.PORT || 3000;
+// const port = process.env.PORT || 3000;
 
-var server = require("http").Server(app);
-var io = require("socket.io")(server);
-//
-io.on("connect", (socket) => {
-  let accessToken;
-  let userData;
-  let cookies = socket.handshake.headers.cookie.split(";");
-  for (let cookie of cookies) {
-    cookie.startsWith("accessToken") || cookie.startsWith(" accessToken")
-      ? (accessToken = cookie.split("=")[1])
-      : (accessToken = "noToken");
-  }
-  jwt.verify(
-    accessToken,
-    `${process.env.JWT_SECRET_KEY}`,
-    function (err, decoded) {
-      userData = decoded;
-    }
-  );
-  socket.on("globalChanel", (data) => {
-    console.log(data);
-    if (data.accessToken) {
-      jwt.verify(
-        data.accessToken,
-        `${process.env.JWT_SECRET_KEY}`,
-        function (err, decoded) {
-          try {
-            if (decoded.userName) {
-              sendGlobalChanel = {
-                userName: decoded.userName,
-                message: data.message,
-              };
-              io.emit("globalChanel", sendGlobalChanel);
-            }
-          } catch (error) {
-            console.log(msg);
-          }
-        }
-      );
-    }
-  });
-  socket.on("disconnect", () => {
-    /* … */
-  });
-});
+// import socketIO
+const socketio = require("./util/socketIO");
+socketio(app);
 
 const database = require("./config/db");
 
@@ -93,6 +50,6 @@ route(app);
 // app.listen(process.env.PORT || 3000, () =>
 //   console.log(`Example app listening on port 3000 or ${process.env.PORT}!`)
 // );
-server.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
-});
+// server.listen(port, () => {
+//   console.log(`Example app listening on port ${port}`);
+// });
