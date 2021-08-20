@@ -10,7 +10,7 @@ for (let cookie of cookies) {
     ? (accessToken = cookie.split("=")[1])
     : accessToken;
 }
-const socket = io(`ws://localhost:${port}`);
+const socket = io(`ws://aninote.herokuapp.com:${port}`);
 socket.on("connect", () => {
   // either with send()
   socket.send("TokenClient: " + accessToken);
@@ -18,7 +18,6 @@ socket.on("connect", () => {
 
 // handle the event sent with socket.send()
 socket.on("globalChanel", (data) => {
-  console.log(data);
   $(".message-list").prepend(
     `<li class="list-group-item">${data.userName}: ${data.message}</li>`
   );
