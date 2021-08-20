@@ -1,5 +1,5 @@
 TEST = function TEST(req, res, next) {
-  //console.log("from TEST| Request URL:", req.body);
+  console.log("from TEST| Socket port:", process.env.PORT);
   next();
 };
 
