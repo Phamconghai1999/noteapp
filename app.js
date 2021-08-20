@@ -6,25 +6,49 @@ const app = express();
 const route = require("./routes");
 const exphbs = require("express-handlebars");
 const session = require("express-session");
+const port = process.env.PORT || 3000;
 
 var server = require("http").Server(app);
 var io = require("socket.io")(server);
-const port = process.env.PORT || 3000;
 //
-io.on("connection", (client) => {
-  let accessToken = client.handshake.headers.cookie.split("=")[1];
+io.on("connect", (socket) => {
+  let accessToken;
+  let userData;
+  let cookies = socket.handshake.headers.cookie.split(";");
+  for (let cookie of cookies) {
+    cookie.startsWith("accessToken") || cookie.startsWith(" accessToken")
+      ? (accessToken = cookie.split("=")[1])
+      : (accessToken = "noToken");
+  }
   jwt.verify(
     accessToken,
     `${process.env.JWT_SECRET_KEY}`,
     function (err, decoded) {
-      console.log(decoded);
       userData = decoded;
     }
   );
-  client.on("message", (data) => {
-    console.log(data);
+  socket.on("globalChanel", (data) => {
+    if (data.accessToken) {
+      jwt.verify(
+        data.accessToken,
+        `${process.env.JWT_SECRET_KEY}`,
+        function (err, decoded) {
+          try {
+            if (decoded.userName) {
+              sendGlobalChanel = {
+                userName: decoded.userName,
+                message: data.message,
+              };
+              io.emit("globalChanel", sendGlobalChanel);
+            }
+          } catch (error) {
+            console.log(msg);
+          }
+        }
+      );
+    }
   });
-  client.on("disconnect", () => {
+  socket.on("disconnect", () => {
     /* … */
   });
 });
