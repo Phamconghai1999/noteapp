@@ -1,4 +1,5 @@
 var jwt = require("jsonwebtoken");
+const globalchanel = require("../app/models/Globalchanel");
 
 socketIO = (app) => {
   var server = require("http").Server(app);
@@ -26,7 +27,6 @@ socketIO = (app) => {
       }
     );
     socket.on("globalChanel", (data) => {
-      console.log(data);
       if (data.accessToken) {
         jwt.verify(
           data.accessToken,
@@ -38,10 +38,19 @@ socketIO = (app) => {
                   userName: decoded.userName,
                   message: data.message,
                 };
+                console.log(sendGlobalChanel);
+                const newGlobalchanel = new globalchanel({
+                  message: data.message,
+                  user: decoded.userId,
+                });
+                newGlobalchanel.save(function (err) {
+                  if (err) return handleError(err);
+                  // saved!
+                });
                 io.emit("globalChanel", sendGlobalChanel);
               }
             } catch (error) {
-              console.log(msg);
+              console.log(error);
             }
           }
         );
