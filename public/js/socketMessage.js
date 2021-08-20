@@ -10,7 +10,7 @@ for (let cookie of cookies) {
     ? (accessToken = cookie.split("=")[1])
     : accessToken;
 }
-const socket = io(`ws://aninote.herokuapp.com:${port}`);
+const socket = io(`ws:https://aninote.herokuapp.com:${port}`);
 socket.on("connect", () => {
   // either with send()
   socket.send("TokenClient: " + accessToken);
