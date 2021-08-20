@@ -79,7 +79,7 @@ class AuthController {
           `${process.env.JWT_SECRET_KEY}`
         );
         res.cookie("accessToken", `${accessToken}`, {
-          expires: new Date(Date.now() + 600000),
+          expires: 0, // new Date(Date.now() + 600000),
         });
 
         return res.redirect("../me/profile");
