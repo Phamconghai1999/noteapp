@@ -28,6 +28,7 @@ io.on("connect", (socket) => {
     }
   );
   socket.on("globalChanel", (data) => {
+    console.log(data);
     if (data.accessToken) {
       jwt.verify(
         data.accessToken,
