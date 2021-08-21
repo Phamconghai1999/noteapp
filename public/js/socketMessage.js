@@ -21,9 +21,8 @@ socket.on("connect", () => {
 
 // handle the event sent with socket.send()
 socket.on("globalChanel", (data) => {
-  $(".message-list").prepend(
-    `<li class="list-group-item">${data.userName}: ${data.message}</li>`
-  );
+  let msgDisplay = `<li class="list-group-item d-flex"><img src="${data.userAvatar}" alt="avt" width="30" height="30" class="avatar-msg"><p class="user-name-msg">${data.userName}:</p> <p class="info-msg"> ${data.message}</p></li>`;
+  $(".message-list").prepend(msgDisplay);
 });
 // send message with socket
 let messageForm = document.getElementById("messageForm");

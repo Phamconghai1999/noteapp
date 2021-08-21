@@ -49,6 +49,18 @@ body {
   margin: auto 12px auto 3px;
 }
 
+.avatar-msg {
+  border: 1px solid rgba(2, 255, 200, 0.726);
+  border-radius: 50%;
+}
+.user-name-msg {
+  margin: 4px 8px;
+  font-weight: bold;
+}
+.info-msg {
+  margin: 4px 8px;
+}
+
 @keyframes mymove {
   from {
     border: 1px solid #f2f3f4;

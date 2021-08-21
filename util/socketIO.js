@@ -35,6 +35,7 @@ socketIO = (app) => {
             try {
               if (decoded.userName) {
                 sendGlobalChanel = {
+                  userAvatar: decoded.avatar,
                   userName: decoded.userName,
                   message: data.message,
                 };
@@ -44,7 +45,7 @@ socketIO = (app) => {
                   user: decoded.userId,
                 });
                 newGlobalchanel.save(function (err) {
-                  if (err) return handleError(err);
+                  if (err) return console.log("mongoDBerr" + err);
                   // saved!
                 });
                 io.emit("globalChanel", sendGlobalChanel);

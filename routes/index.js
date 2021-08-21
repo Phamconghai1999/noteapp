@@ -2,6 +2,7 @@ const toolsRoute = require("./tools");
 const authRoute = require("./auth");
 const meRoute = require("./me");
 const siteRoute = require("./site");
+const apiRoute = require("./api");
 
 const TEST = require("../app/middlewares/TEST"); //  middleware application
 const ErrorHandler = require("../app/middlewares/ErrorHandler"); //error handler middleware
