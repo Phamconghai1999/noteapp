@@ -21,8 +21,7 @@ socket.on("connect", () => {
 
 // handle the event sent with socket.send()
 socket.on("globalChanel", (data) => {
-  let msgDisplay = `<li class="list-group-item d-flex"><img src="${data.userAvatar}" alt="avt" width="30" height="30" class="avatar-msg"><p class="user-name-msg">${data.userName}:</p> <p class="info-msg"> ${data.message}</p></li>`;
-  $(".message-list").prepend(msgDisplay);
+  $(".message-list").prepend(renderMsg(data));
 });
 // send message with socket
 let messageForm = document.getElementById("messageForm");
@@ -35,3 +34,11 @@ messageForm.addEventListener("submit", function (e) {
     messageBox.value = "";
   }
 });
+
+const renderMsg = (data) => {
+  let itemMsg;
+  data
+    ? (itemMsg = `<li class="list-group-item d-flex"><img src="${data.userAvatar}" alt="avt" width="30" height="30" class="avatar-msg"><p class="user-name-msg">${data.userName}:</p> <p class="info-msg"> ${data.message}</p><p class="info-msg "> [ ${data.time} ]</p></li>`)
+    : null;
+  return itemMsg;
+};

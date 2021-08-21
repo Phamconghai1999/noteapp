@@ -34,12 +34,33 @@ socketIO = (app) => {
           function (err, decoded) {
             try {
               if (decoded.userName) {
+                // get time
+                var date = new Date();
+                var month = [
+                  "Jan",
+                  "Feb",
+                  "Mar",
+                  "Apr",
+                  "May",
+                  "Jun",
+                  "Jul",
+                  "Aug",
+                  "Sep",
+                  "Oct",
+                  "Nov",
+                  "Dec",
+                ];
+                var time = `${date.getHours()}:${date.getMinutes()} ${date.getDate()} ${
+                  month[date.getMonth()]
+                }`;
+                //create message to send to global room
                 sendGlobalChanel = {
                   userAvatar: decoded.avatar,
                   userName: decoded.userName,
                   message: data.message,
+                  time: time,
                 };
-                console.log(sendGlobalChanel);
+                // create database
                 const newGlobalchanel = new globalchanel({
                   message: data.message,
                   user: decoded.userId,
@@ -47,7 +68,9 @@ socketIO = (app) => {
                 newGlobalchanel.save(function (err) {
                   if (err) return console.log("mongoDBerr" + err);
                   // saved!
+                  console.log("DB saved!");
                 });
+                // emit to all client
                 io.emit("globalChanel", sendGlobalChanel);
               }
             } catch (error) {

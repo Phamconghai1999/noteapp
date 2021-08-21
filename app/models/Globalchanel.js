@@ -12,7 +12,7 @@ const globalChanelSchema = new mongoose.Schema({
   },
   sendAt: {
     type: Date,
-    default: Date.now(),
+    default: Date(),
   },
 });
 

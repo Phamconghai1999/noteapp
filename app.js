@@ -36,8 +36,25 @@ app.engine(
   exphbs({
     extname: ".hbs",
     helpers: {
-      sum: (a, b) => {
-        return a + b;
+      parseStringTime: (time) => {
+        let Time = new Date(time);
+        var month = [
+          "Jan",
+          "Feb",
+          "Mar",
+          "Apr",
+          "May",
+          "Jun",
+          "Jul",
+          "Aug",
+          "Sep",
+          "Oct",
+          "Nov",
+          "Dec",
+        ];
+        return `${Time.getHours()}:${Time.getMinutes()} ${Time.getDate()} ${
+          month[Time.getMonth()]
+        }`;
       },
     },
   })

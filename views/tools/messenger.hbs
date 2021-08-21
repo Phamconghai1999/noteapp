@@ -7,15 +7,18 @@
             <button class="btn btn-outline-success" id="sendMessageButton" type="submit">Gửi</button>
         </form>
     </div>
-    <div class="messagePanel container-md">
+    <div class="messagePanel container-sm">
         <p class="fs-3">Global: </p>
         <p class="fs-6">Message: </p>
         <ul class="message-list list-group list-group-flush">
-            <li class="list-group-item d-flex"><img src="/img/anilogo.jpg" alt="logo" width="30" height="30"
-                    class="avatar-msg">
-                <p class="user-name-msg">Pham Cong Hai: </p>
-                <p class="info-msg">Tin nhan</p>
+            {{#each lastestMessage}}
+            <li class="list-group-item d-flex">
+                <img src={{this.avatar}} alt="avt" width="30" height="30" class="avatar-msg">
+                <p class="user-name-msg">{{this.user}}:</p>
+                <p class="info-msg "> {{this.message}}</p>
+                <p class="info-msg "> [ {{parseStringTime this.time}} ]</p>
             </li>
+            {{/each}}
         </ul>
     </div>
 </div>

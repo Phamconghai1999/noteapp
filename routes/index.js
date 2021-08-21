@@ -12,9 +12,11 @@ route = (app) => {
   app.use("/", TEST);
   app.use(cookieParser());
   //use routes
+  app.use("/api", apiRoute);
   app.use("/tools", toolsRoute);
   app.use("/auth", authRoute);
   app.use("/me", meRoute);
+  app.use("/home", siteRoute);
   app.use("/", siteRoute);
 };
 
