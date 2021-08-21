@@ -51,6 +51,9 @@ body {
 .info-msg {
   margin: 4px 8px; }
 
+.time-msg {
+  opacity: 0.4; }
+
 @keyframes mymove {
   from {
     border: 1px solid #f2f3f4; }

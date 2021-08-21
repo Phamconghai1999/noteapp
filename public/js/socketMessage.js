@@ -13,7 +13,7 @@ try {
   console.log(error);
 }
 
-const socket = io("https://aninote.heroku.com");
+const socket = io("https://aninote.herokuapp.com/");
 socket.on("connect", () => {
   // either with send()
   socket.send("TokenClient: " + accessToken);
