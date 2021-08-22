@@ -85,7 +85,7 @@ socketIO = (app) => {
     });
   });
   server.listen(port, () => {
-    console.log(`Example app listening on port ${port}`);
+    console.log(`Server listening on port ${port}`);
   });
 };
 

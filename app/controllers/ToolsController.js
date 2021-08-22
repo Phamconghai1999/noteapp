@@ -22,7 +22,7 @@ class ToolsController {
             time: Date.parse(message.sendAt),
           });
         }
-        res.render("tools/messenger", { userData, lastestMessage });
+        res.render("tools/globalchanel", { userData, lastestMessage });
       });
   };
 }

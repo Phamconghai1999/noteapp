@@ -2,7 +2,8 @@ class SiteController {
   // [GET] /
   index(req, res, next) {
     let userData = { ...req.userData };
-    res.render("home", { userData });
+    res.redirect("/global/userlist");
+    // res.render("home", { userData });
   }
 }
 

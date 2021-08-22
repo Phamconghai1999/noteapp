@@ -7,8 +7,16 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                <li>
+                    <a class="nav-link active" aria-current="page" href="/">
+                        Home
+                        <i class="fa fa-home"></i>
+                    </a>
+                </li>
+                <li><a class="nav-link active" aria-current="page" href="/tools/messenger">
+                        Global
+                        <i class="far fa-comment-alt"></i>
+                    </a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -16,18 +24,19 @@
                         Tools
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="/me/profile">My Profile</a></li>
-                        <li><a class="dropdown-item" href="/tools/messenger">Messenger(test)</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="#">Coding...</a></li>
-                    </ul>
+                        <li><a class="dropdown-item" href="/me/profile">My Profile <i class="far fa-edit"></i></a></li>
+                        <li><a class="dropdown-item" href="/global/userlist">Add Friends <i
+                                    class="far fa-address-card"></i></a></li>
+
+                        <hr class="dropdown-divider">
                 </li>
-                <form class="d-flex ">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
+                <li><a class="dropdown-item" href="#">Coding...</a></li>
+            </ul>
+            </li>
+            <form class="d-flex ">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
             </ul>
             <div class="profile-img">
                 <a href="/me/profile"><img src={{userData.avatar}} alt="/img/ani.jpg" height="40px" width="40px"></a>

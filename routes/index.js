@@ -3,6 +3,7 @@ const authRoute = require("./auth");
 const meRoute = require("./me");
 const siteRoute = require("./site");
 const apiRoute = require("./api");
+const globalRoute = require("./global");
 
 const TEST = require("../app/middlewares/TEST"); //  middleware application
 const ErrorHandler = require("../app/middlewares/ErrorHandler"); //error handler middleware
@@ -13,6 +14,7 @@ route = (app) => {
   app.use(cookieParser());
   //use routes
   app.use("/api", apiRoute);
+  app.use("/global", globalRoute);
   app.use("/tools", toolsRoute);
   app.use("/auth", authRoute);
   app.use("/me", meRoute);
