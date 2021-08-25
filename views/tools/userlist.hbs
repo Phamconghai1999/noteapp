@@ -2,8 +2,91 @@
     <p style="color: rgba(255, 102, 0, 0.932); font-size: 25px; font-weight: bold;"> Aninote User: </p>
     <div class="row">
         {{#each allUsers}}
-        {{> card this}}
+        <div class="col-sm-4 col-lg-3 card-profile" id={{this._id}}>
+            <div class="card" style="width: 18rem; height: 22rem;">
+                <div class="profile-img">
+                    <a href="#">
+                        <img class="card-profile-img" src={{this.avatar}} alt="Card image cap">
+                    </a>
+                </div>
+
+                <div class="card-body">
+                    <a style="text-decoration:none" href="#">
+                        <h5 class="card-title">{{this.name}}</h5>
+                    </a>
+                    <p class="card-text">{{this.email}}</p>
+                    <a href="#" class="btn btn-outline-success open-chatbox-btn" type="button"
+                        data-id="{{this._id}}">Nhắn tin</a>
+                    <a href="#" class="btn btn-outline-primary addFriend-btn" type="button" data-id={{this._id}}>Thêm
+                        bạn bè</a>
+                </div>
+            </div>
+        </div>
         {{/each}}
 
     </div>
 </div>
+
+<div class="chatbox-container">
+    <div class="chat-box" id="fb_msg">
+        <!-- chatbox -->
+        <div class="chatheader ml-2"> Name</div> <!-- your name -->
+        <div class='close-chatfb' id="close-chatbox-btn"></div><!-- close chat -->
+        <div class="pesan_chat">
+            <div class="message-history">
+                <div>This is an example of using .overflow-auto on an element with set width and height dimensions. By
+                    design, this content will vertically scroll.</div>
+                <div>This is an example of using .overflow-auto on an element with set width and height dimensions. By
+                    design, this content will vertically scroll.</div>
+                <div>This is an example of using .overflow-auto on an element with set width and height dimensions. By
+                    design, this content will vertically scroll.</div>
+                design, this content will vertically scroll.</p>
+            </div>
+            <div class="container-fluid chatbox-form">
+                <form class="d-flex" name="chatbox-form" autocomplete="off" method="POST">
+                    <input class="form-control chatbox" type="text" placeholder="Aa" aria-label="Message"
+                        id="messageBox" name="msg">
+                    <button class="btn chatbox-send-btn" id="" type="submit"><i class="far fa-paper-plane"></i></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        //define obj
+        chatboxForm = document.forms["chatbox-form"];
+        chatboxSendButton = $(".chatbox-send-btn");
+        openChatBoxBtn = $(".open-chatbox-btn");
+        console.log()
+        // BUTTON
+        $(function () {
+            $(".open-chatbox-btn").click(function (e) {
+                e.preventDefault();
+                $("#messageBox").val(""); // clear form
+                revUserId = $(this).data("id");
+                revUserName = $(`#${revUserId}`).find("h5.card-title")[0].innerHTML;
+                $(".chatheader")[0].innerHTML = revUserName;
+                //
+                chatboxForm.action = '/message/' + revUserId;
+                // display popup
+                $('#fb_msg').addClass('popup-on');
+                console.log($(`#${revUserId}`).find("h5.card-title")[0].innerHTML);
+            });
+
+            $("#close-chatbox-btn").click(function () {
+                $('#fb_msg').removeClass('popup-on');
+            });
+        });
+
+        function clearMessageBox() {
+            $("#messageBox").val("");
+        }
+        chatboxSendButton.click(function (e) {
+            e.preventDefault();
+            console.log("click")
+            chatboxForm.submit();
+        })
+    });
+</script>

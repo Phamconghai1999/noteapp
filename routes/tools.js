@@ -5,6 +5,6 @@ const Auth = require("../app/middlewares/Auth");
 const toolsController = require("../app/controllers/ToolsController");
 
 //[GET] domain.com/tools/
-router.get("/messenger", Auth, toolsController.messenger);
+router.get("/", Auth, toolsController.index);
 
 module.exports = router;

@@ -1,3 +1,4 @@
+const messageRoute = require("./message");
 const toolsRoute = require("./tools");
 const authRoute = require("./auth");
 const meRoute = require("./me");
@@ -15,6 +16,7 @@ route = (app) => {
   //use routes
   app.use("/api", apiRoute);
   app.use("/global", globalRoute);
+  app.use("/message", messageRoute);
   app.use("/tools", toolsRoute);
   app.use("/auth", authRoute);
   app.use("/me", meRoute);
