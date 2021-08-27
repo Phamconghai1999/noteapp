@@ -1,5 +1,5 @@
 var jwt = require("jsonwebtoken");
-const globalchanel = require("../app/models/Globalchanel");
+const globalchanel = require("../app/models/Globalchanel"); // its a model
 
 var onlineUsers = [];
 socketIO = (app) => {
@@ -38,7 +38,7 @@ socketIO = (app) => {
         dupUser
           ? true
           : onlineUsers.push({ userId: userDataId, socketId: socketId });
-        console.log(onlineUsers);
+        // console.log(onlineUsers);
       }
     );
     // console.log(socket.id);
@@ -104,7 +104,7 @@ socketIO = (app) => {
           ? onlineUsers.splice(index, 1) // delete user disconnected
           : false;
       });
-      console.log(onlineUsers);
+      // console.log(onlineUsers);
     });
   });
   server.listen(port, () => {
