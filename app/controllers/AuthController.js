@@ -10,7 +10,7 @@ class AuthController {
     if (!req.cookies.accessToken) {
       res.render("auth/login", { layout: false });
     } else {
-      res.redirect("../me/profile");
+      res.redirect("../home");
     }
   }
   // [GET] domain.com/auth/logout
@@ -82,7 +82,7 @@ class AuthController {
           expires: 0, // new Date(Date.now() + 600000),
         });
 
-        return res.redirect("../me/profile");
+        return res.redirect("../home");
       }
     });
   }

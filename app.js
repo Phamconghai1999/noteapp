@@ -5,6 +5,7 @@ const app = express();
 const route = require("./routes");
 const exphbs = require("express-handlebars");
 const session = require("express-session");
+const cors = require("cors"); // CORS support
 // const port = process.env.PORT || 3000;
 
 // import socketIO
@@ -12,7 +13,8 @@ const socketio = require("./util/socketIO");
 socketio(app);
 
 const database = require("./config/db");
-
+//use CORS support
+app.use(cors());
 //use session
 app.use(
   session({
